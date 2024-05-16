@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "JsonToXml": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\JsonToXmlSamples\\JsonFiles\"\r\n\"C:\\JsonToXmlSamples\\XMLFiles\""
+    }
+  }
+}
