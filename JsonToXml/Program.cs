@@ -29,7 +29,16 @@ namespace JsonToXml
                 {
                     string jsonContent = File.ReadAllText(jsonFile);
 
-                    XDocument xmlDoc = JsonConvert.DeserializeXNode(jsonContent, "Root") ?? new XDocument();
+                    XDocument xmlDoc;
+                    try
+                    {
+                        xmlDoc = JsonConvert.DeserializeXNode(jsonContent);
+                    }
+                    catch
+                    {
+                        xmlDoc = JsonConvert.DeserializeXNode($"{{\"TempRoot\":{jsonContent}}}", "TempRoot");
+                        xmlDoc = new XDocument(xmlDoc.Root.Elements().First());
+                    }
 
                     string outputFilePath = Path.Combine(outputDirectory, Path.GetFileNameWithoutExtension(jsonFile) + ".xml");
 
